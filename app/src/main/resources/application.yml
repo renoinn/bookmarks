@@ -1,0 +1,24 @@
+spring:
+  freemarker:
+    suffix: .ftlh
+    cache: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    open-in-view: true
+    properties:
+      hibernate.show_sql: true
+      hibernate.dialect.storage_engine: innodb
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:33060/bookmarks_db?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    initialization-mode: always
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+      hibernate: DEBUG
