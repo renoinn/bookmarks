@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
 @Component
-class SetupUserDataTask(
+class SetupDataTask(
         private val userService: UserService
 ) : ApplicationListener<ContextRefreshedEvent> {
     private var alreadySetup = false
@@ -18,7 +18,10 @@ class SetupUserDataTask(
         if (alreadySetup) return
         alreadySetup = true
 
+        // user data
         createUserIfNotFound(1, "test@gmail.com", "test")
+
+        // bookmark data
     }
 
     @Transactional
