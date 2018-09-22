@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 
 
 @Configuration
@@ -42,7 +43,9 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 .loginPage("/")
                 //.failureHandler(SampleAuthenticationFailureHandler())
                 .defaultSuccessUrl("/home")
-
+        http.logout()
+                .logoutRequestMatcher(AntPathRequestMatcher("/logout**"))
+                .logoutSuccessUrl("/")
     }
 
     @Configuration
