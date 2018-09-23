@@ -17,7 +17,7 @@ data class Bookmark(
         val siteId: Long = 0,
 
         @Column(nullable = true)
-        val note: String = "",
+        val note: String?,
 
         @Column(nullable = false)
         val createdAt: Date = Date(),

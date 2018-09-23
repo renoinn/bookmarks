@@ -34,13 +34,15 @@ class BookmarkServiceImpl(
                 note = bookmark.note
         ))
 
-        val tagNames = bookmark.tags.split(Regex("\\s+"))
-        tagNames.forEach {
-            tagService.tryCreate(Tag(
-                    siteId = site.id,
-                    userId = currentUser.id,
-                    tagName = it
-            ))
+        bookmark.tags?.let {
+            val tagNames = it.split(Regex("\\s+"))
+            tagNames.forEach {
+                tagService.tryCreate(Tag(
+                        siteId = site.id,
+                        userId = currentUser.id,
+                        tagName = it
+                ))
+            }
         }
 
         return findById(b.id)

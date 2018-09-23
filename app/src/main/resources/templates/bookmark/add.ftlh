@@ -7,20 +7,25 @@
     <body>
         <form role="form" action="/bookmark/add" method="POST">
             <div>
-                <label for="url">username</label>
+                <label for="url">url</label>
                 <input type="input" name="url" id="url" required autofocus/>
             </div>
             <div>
-                 <label for="title">password</label>
+                 <label for="title">title</label>
                  <input type="input" name="title" id="title" required/>
             </div>
             <div>
                 <textarea name="note" id="note"></textarea>
             </div>
             <div>
-                 <label for="tags">password</label>
+                 <label for="tags">tag</label>
                  <input type="input" name="tags" id="tags"/>
             </div>
+            <ul>
+            <#list tags as tag>
+                <li>${tag.tagName}</li>
+            </#list>
+            </ul>
             <button type="submit">submit</button>
         </form>
     </body>
