@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <title>Hello Spring</title>
-    </head>
-    <body>
+<#import "/__wrapper.ftlh" as wrapper>
+<@wrapper.main>
+
         <p>Login Success!</p>
-    </body>
-</html>
+
+</@wrapper.main>

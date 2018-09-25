@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
+  mode: 'development',
   entry: './src/main/js/app.js',
   output: {
     filename: 'bundle.js',
@@ -16,7 +17,7 @@ module.exports = {
           loaders: {
             css: ExtractTextPlugin.extract({
               use: 'css-loader',
-              fallback: 'vue-style-loader' // <- これは vue-loader の依存ですので、npm3 を使用している場合は明示的にインストールする必要はありません
+              fallback: 'vue-style-loader'
             })
           }
         }
@@ -41,8 +42,13 @@ module.exports = {
 //      {test: /\.ttf$/, loader: 'url-loader?mimetype=application/font-woff'}
     ]
   },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
+  },
   plugins: [
-    new ExtractTextPlugin("styles.css"),
+    new ExtractTextPlugin("css/styles.css"),
   ]
 }
 ;

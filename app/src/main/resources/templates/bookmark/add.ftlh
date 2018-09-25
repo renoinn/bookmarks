@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <title>Hello Spring</title>
-    </head>
-    <body>
+<#import "/__wrapper.ftlh" as wrapper>
+<@wrapper.main>
+
         <form role="form" action="/bookmark/add" method="POST">
             <div>
                 <label for="url">url</label>
@@ -17,16 +13,19 @@
             <div>
                 <textarea name="note" id="note"></textarea>
             </div>
-            <div>
-                 <label for="tags">tag</label>
-                 <input type="input" name="tags" id="tags"/>
+            <div id="tag-input">
+                <div>
+                <label for="tags">tag</label>
+                <input type="input" name="tags" id="tags" v-model="tags"/>
+                <ul>
+                    <#list tags as tag>
+                        <li v-on:click="onClickHandler">${tag.tagName}</li>
+                    </#list>
+                </ul>
+                </div>
             </div>
-            <ul>
-            <#list tags as tag>
-                <li>${tag.tagName}</li>
-            </#list>
-            </ul>
+
             <button type="submit">submit</button>
         </form>
-    </body>
-</html>
+
+</@wrapper.main>
