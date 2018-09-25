@@ -19,7 +19,7 @@
                 <input type="input" name="tags" id="tags" v-model="tags"/>
                 <ul>
                     <#list tags as tag>
-                        <li v-on:click="onClickHandler">${tag.tagName}</li>
+                        <li v-on:click="onClickHandler('${tag.tagName}')">${tag.tagName}</li>
                     </#list>
                 </ul>
                 </div>

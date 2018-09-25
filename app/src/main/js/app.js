@@ -3,9 +3,19 @@ import Vue from "vue";
 var tagForm = new Vue({
     el: '#tag-input',
     data: {
-        tags: "yahoo web"
+        tags: ""
     },
-    onClickHandler: function() {
-        this.tags = this.tags.split(" ").push("hoge").join(" ");
+    methods: {
+        onClickHandler: function(tagName) {
+            let tagArray = this.tags.split(" ");
+
+            if (tagArray.includes(tagName)) {
+                tagArray = tagArray.filter(tag => tag != tagName)
+            } else {
+                tagArray.push(tagName);
+            }
+
+            this.tags = tagArray.join(" ");
+        }
     }
 });
