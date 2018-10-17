@@ -1,54 +1,52 @@
 const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
-  mode: 'development',
+  //context: __dirname + '/src',
   entry: './src/main/js/app.js',
   output: {
-    filename: 'bundle.js',
-    path: __dirname + '/build/resources/main/static/js'
+    filename: 'js/bundle.js',
+    path: __dirname + '/build/resources/main/static/'
+  },
+  devServer: {
+    contentBase: 'dist',
+    port: 3000
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            css: ExtractTextPlugin.extract({
-              use: 'css-loader',
-              fallback: 'vue-style-loader'
-            })
+        loader: 'vue-loader'
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: [
+                path.resolve(__dirname, './src/main/scss/_mixin.scss')
+              ]
+            }
           }
-        }
-      },
-      {
-        test: /\.js$/,
-        use: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader"
-        })
+        ]
       }
-      // bootstrap に含まれる font 等を data url に変換する。
-//      {test: /\.svg$/, loader: 'url-loader?mimetype=image/svg+xml'},
-//      {test: /\.woff$/, loader: 'url-loader?mimetype=application/font-woff'},
-//      {test: /\.woff2$/, loader: 'url-loader?mimetype=application/font-woff'},
-//      {test: /\.eot$/, loader: 'url-loader?mimetype=application/font-woff'},
-//      {test: /\.ttf$/, loader: 'url-loader?mimetype=application/font-woff'}
     ]
   },
+  devtool: 'source-map',
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
     }
   },
   plugins: [
-    new ExtractTextPlugin("css/styles.css"),
+    new MiniCssExtractPlugin({filename: "css/styles.css"}),
+    new VueLoaderPlugin()
   ]
 }
 ;

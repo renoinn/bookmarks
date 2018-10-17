@@ -1,5 +1,6 @@
 package com.oomori.app.web.controller
 
+import com.oomori.app.domain.entity.Site
 import com.oomori.app.domain.entity.User
 import com.oomori.app.domain.service.BookmarkService
 import com.oomori.app.domain.service.TagService
@@ -29,7 +30,11 @@ class BookmarkController(
 
     @PostMapping("/add")
     fun add(@ModelAttribute request: BookmarkRequest, @AuthenticationPrincipal currentUser: User): String {
-        bookmarkService.tryCreate(request, currentUser)
+        bookmarkService.tryCreate(
+                site = Site(url = request.url, title = request.title),
+                note = request.note,
+                tags = request.tags,
+                currentUser = currentUser)
         return "redirect:" + request.url
     }
 }

@@ -11,7 +11,7 @@ class TagServiceImpl(
         private val tagRepository: TagRepository
 ) : TagService {
     override fun tryCreate(tag: Tag): Optional<Tag> {
-        val existsSite = tagRepository.findByTagName(tag.tagName)
+        val existsSite = tagRepository.findBySiteIdAndTagName(tag.siteId, tag.tagName)
         if (existsSite.isPresent)
             return existsSite
 

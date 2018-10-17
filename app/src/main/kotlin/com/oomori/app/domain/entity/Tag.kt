@@ -24,4 +24,12 @@ data class Tag(
 
         @Column(nullable = false)
         val updatedAt: Date = Date()
+
+//        @OneToOne
+//        @JoinTable(
+//                name = "bookmark_tags",
+//                joinColumns = [JoinColumn(name = "id", referencedColumnName = "tag_id", insertable = false, updatable = false)],
+//                inverseJoinColumns = [JoinColumn(name = "bookmark_id", referencedColumnName = "id", insertable = false, updatable = false)]
+//        )
+//        val bookmark: Bookmark? = null
 )

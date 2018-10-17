@@ -7,6 +7,6 @@ import java.util.*
 
 @Repository
 interface TagRepository : JpaRepository<Tag, Long> {
-    fun findByTagName(tagName: String): Optional<Tag>
+    fun findBySiteIdAndTagName(siteId: Long, tagName: String): Optional<Tag>
     fun findByUserId(userId: Long): List<Tag>
 }

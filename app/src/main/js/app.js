@@ -1,4 +1,6 @@
 import Vue from "vue";
+import VueRouter from 'vue-router';
+import routes from './routes';
 
 var tagForm = new Vue({
     el: '#tag-input',
@@ -18,4 +20,14 @@ var tagForm = new Vue({
             this.tags = tagArray.join(" ");
         }
     }
+});
+
+Vue.use(VueRouter);
+const router = new VueRouter({
+    routes: routes
+});
+
+new Vue({
+    el: '#app',
+    router
 });

@@ -10,11 +10,8 @@ data class Bookmark(
         @Column(nullable = false)
         val id: Long = 0,
 
-        @Column(nullable = false)
+        @Column(name = "user_id", nullable = false)
         val userId: Long = 0,
-
-        @Column(nullable = false)
-        val siteId: Long = 0,
 
         @Column(nullable = true)
         val note: String?,
@@ -23,5 +20,15 @@ data class Bookmark(
         val createdAt: Date = Date(),
 
         @Column(nullable = false)
-        val updatedAt: Date = Date()
+        val updatedAt: Date = Date(),
+
+        @ManyToOne
+        val site: Site = Site(),
+
+        @ManyToMany
+        @JoinColumns(
+                JoinColumn(name = "user_id"),
+                JoinColumn(name = "site_id")
+        )
+        val tags: List<Tag>? = null
 )
